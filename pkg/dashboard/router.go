@@ -42,6 +42,9 @@ func GetRouter(setters ...Option) *mux.Router {
 
 	router := mux.NewRouter().PathPrefix(opts.basePath).Subrouter()
 
+	// api
+	router.Handle("/api/{namespace:[a-zA-Z0-9-]+}", Api(*opts))
+
 	// health
 	router.Handle("/health", Health("OK"))
 	router.Handle("/healthz", Healthz())
